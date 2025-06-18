@@ -1,0 +1,35 @@
+PLINK v1.9.0-b.7.7 64-bit (22 Oct 2024)
+Options in effect:
+  --allow-extra-chr
+  --allow-no-sex
+  --const-fid 0
+  --cow
+  --extract markers.txt
+  --keep-allele-order
+  --out marker_outputs/rsid_extracted.vcf
+  --recode vcf
+  --vcf test.vcf
+
+Hostname: NSRI_AIMS
+Working directory: C:\Users\lcbsa\OneDrive\Documents\Pipeline\R projects\.official\extractMarkers
+Start time: Wed Jun 18 15:28:41 2025
+
+Random number seed: 1750231721
+16108 MB RAM detected; reserving 8054 MB for main workspace.
+--vcf: marker_outputs/rsid_extracted.vcf-temporary.bed +
+marker_outputs/rsid_extracted.vcf-temporary.bim +
+marker_outputs/rsid_extracted.vcf-temporary.fam written.
+56 variants loaded from .bim file.
+278 cattle (0 males, 0 females, 278 ambiguous) loaded from .fam.
+Ambiguous sex IDs written to marker_outputs/rsid_extracted.vcf.nosex .
+--extract: 56 variants remaining.
+Using 1 thread (no multithreaded calculations invoked).
+Before main variant filters, 278 founders and 0 nonfounders present.
+Calculating allele frequencies... done.
+Total genotyping rate is exactly 1.
+56 variants and 278 cattle pass filters and QC.
+Note: No phenotypes present.
+Warning: Underscore(s) present in sample IDs.
+--recode vcf to marker_outputs/rsid_extracted.vcf.vcf ... done.
+
+End time: Wed Jun 18 15:28:41 2025

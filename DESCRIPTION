@@ -1,0 +1,8 @@
+Package: extractmarkers
+Type: Package
+Title: Extracts target markers from a VCF, BCF, or PLINK file using either a list 
+Version: 0.0.1.0
+RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
