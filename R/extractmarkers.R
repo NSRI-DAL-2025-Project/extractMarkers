@@ -16,6 +16,31 @@
 #' extractmarkers(input.file = "test.vcf", snps.list = "markers.txt")
 #' @examples extractmarkers(bed.file = "data.bed", bim.file = "data.bim", fam.file = "data.fam", pos.list = "markers.txt")
 #' @export
+extract_markers <- function(input.file, 
+                            snps.list = NULL, 
+                            pos.list = NULL, 
+                            bed.file = NULL, 
+                            bim.file = NULL, 
+                            fam.file = NULL, 
+                            output.dir = "marker_outputs", 
+                            merged.file = "final_merged.vcf") {
+  # Step 1: Detect file type
+  file_type <- detect_file_type(input.file, bed.file, bim.file, fam.file)
+  
+  # Step 2: Generate extraction commands & execute PLINK
+  commands <- construct_and_execute_plink_command(file_type, 
+                                                  input.file, 
+                                                  snps.list, 
+                                                  pos.list, 
+                                                  bed.file, 
+                                                  bim.file, 
+                                                  fam.file, 
+                                                  output.dir, 
+                                                  merged.file)
+  
+  # Step 3: Print completion message
+  print("Marker extraction and merging completed successfully!")
+}
 
 
 detect_file_type <- function(input.file, bed.file = NULL, bim.file = NULL, fam.file = NULL) {
@@ -130,28 +155,3 @@ construct_and_execute_plink_command <- function(file_type,
 
 
 
-extract_markers <- function(input.file, 
-                            snps.list = NULL, 
-                            pos.list = NULL, 
-                            bed.file = NULL, 
-                            bim.file = NULL, 
-                            fam.file = NULL, 
-                            output.dir = "marker_outputs", 
-                            merged.file = "final_merged.vcf") {
-  # Step 1: Detect file type
-  file_type <- detect_file_type(input.file, bed.file, bim.file, fam.file)
-  
-  # Step 2: Generate extraction commands & execute PLINK
-  commands <- construct_and_execute_plink_command(file_type, 
-                                                  input.file, 
-                                                  snps.list, 
-                                                  pos.list, 
-                                                  bed.file, 
-                                                  bim.file, 
-                                                  fam.file, 
-                                                  output.dir, 
-                                                  merged.file)
-  
-  # Step 3: Print completion message
-  print("Marker extraction and merging completed successfully!")
-}
