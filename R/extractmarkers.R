@@ -33,10 +33,13 @@ detect_file_type <- function(input.file, bed.file = NULL, bim.file = NULL, fam.f
 }
 
 get_plink_path <- function() {
-  plink_path <- file.path("src", "plink.exe")  # Ensure PLINK is executed from src
-  if (!file.exists(plink_path)) {
-    stop("PLINK executable not found in src folder. Please ensure it's correctly placed.")
+  # Default to 'plink' assuming it's in the Linux container's PATH
+  plink_path <- Sys.which("plink")
+  
+  if (plink_path == "") {
+    stop("PLINK is not available in the PATH. Ensure PLINK is installed and accessible.")
   }
+  
   return(plink_path)
 }
 
