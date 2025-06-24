@@ -45,15 +45,17 @@ extract_markers <- function(input.file,
 
 detect_file_type <- function(input.file, bed.file = NULL, bim.file = NULL, fam.file = NULL) {
   file_extension <- tools::file_ext(input.file)
-  
+
   if (!is.null(bed.file) && !is.null(bim.file) && !is.null(fam.file)) {
     return("PLINK")
+  } else if (grepl("\\.vcf\\.gz$", input.file)) {
+    return("VCF_GZ")
   } else if (file_extension == "vcf") {
     return("VCF")
   } else if (file_extension == "bcf") {
     return("BCF")
   } else {
-    stop("Unsupported file type. Please provide a VCF, BCF, or PLINK file.")
+    stop("Unsupported file type. Please provide a VCF, VCF.GZ, BCF, or PLINK file.")
   }
 }
 
@@ -112,6 +114,11 @@ construct_and_execute_plink_command <- function(file_type,
                                              snps.list, 
                                              " --keep-allele-order --allow-no-sex --allow-extra-chr --recode vcf --out ", 
                                              file.path(output.dir, "rsid_extracted")),
+                      "VCF_GZ" = stringr::str_c(plink_path, 
+                                            " --vcf ", input.file, 
+                                            " --const-fid 0 --cow --extract ", snps.list, 
+                                            " --keep-allele-order --allow-no-sex --allow-extra-chr --recode vcf --out ", 
+                                            file.path(output.dir, "rsid_extracted")),
                       "BCF" = stringr::str_c(plink_path, 
                                              " --bcf ", 
                                              input.file, 
