@@ -52,6 +52,11 @@ detect_file_type <- function(input.file, bed.file = NULL, bim.file = NULL, fam.f
     return("VCF")
   } else if (file_extension == "bcf") {
     return("BCF")
+  } else if (file_extension == "gz") {
+    # add a function to unzip files
+    utils::untar(input.file, files = NULL, list = FALSE, exdir = ".")
+    
+    return("GUNZIP")
   } else {
     stop("Unsupported file type. Please provide a VCF, BCF, or PLINK file.")
   }
