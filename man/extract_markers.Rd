@@ -11,8 +11,10 @@ extract_markers(
   bed.file = NULL,
   bim.file = NULL,
   fam.file = NULL,
-  output.dir = "marker_outputs",
-  merged.file = "final_merged.vcf"
+  plink_args = NULL,
+  output.dir = output.dir,
+  merged.file = "final_merged.vcf",
+  plink_path = plink_path
 )
 }
 \arguments{
@@ -27,6 +29,8 @@ extract_markers(
 \item{bim.file}{(character) The file path for the bim file. Should be provided if plink.files = TRUE}
 
 \item{fam.file}{(character) The file path for the fam file. Should be provided if plink.files = TRUE}
+
+\item{plink_args}{(character) The set of plink-specific arguments and their values.}
 }
 \description{
 The 'extract_markers' function extracts a set of markers, either using their rsID or chromosome position, from PLINK, VCF, or BCF files. 
@@ -35,6 +39,6 @@ the first column should contain the chromosome number only (e.g. "1" and not "ch
 the third column the final bp position; and the fourth column should specify the desired output name with no file extension (e.g. "snpsfromchr1").
 }
 \examples{
-extractmarkers(input.file = "test.vcf", snps.list = "markers.txt")
+extractmarkers(input.file = "test.vcf", snps.list = "markers.txt", args = "--maf 0.1 --geno 0.2")
 extractmarkers(bed.file = "data.bed", bim.file = "data.bim", fam.file = "data.fam", pos.list = "markers.txt")
 }
